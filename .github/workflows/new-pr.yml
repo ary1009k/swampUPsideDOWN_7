@@ -51,6 +51,7 @@ jobs:
         PW: ${{ secrets.USER_CRED }}
       run: |
         PR="${{ github.event.pull_request.body }}"
+        echo $PR
         echo $PR | grep -oP '\(backport #\K\d+' | tail -n 1)
         author=$(gh pr view ${ORI_PR} -R ${REPO} --json author -q '.author.login')
         if [[ ! "${author}" =~ "mergify" ]]; then
